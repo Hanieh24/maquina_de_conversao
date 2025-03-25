@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina de Conversão</title>
+    <style>
+     body {/*Fonte, cor, alinhamento, e distância das bordas*/
+       font-family: Arial, sans-serif;
+       background-color: #f4f4f4;
+       padding: 13px;
+       text-align: center;
+     }
+ 
+     h2 {/*Cor do h2*/
+       color: #2c3e50;
+     }
+ 
+     h3 {/*Cor do h3*/
+       color: #34495e;
+     }
+ 
+     select, input {/*Tamanho dos inputs e selects, tamanho da fonte, arredondamento, cor da borda e espaços a cima*/
+       padding: 8px;
+       font-size: 15px;
+       border-radius: 10px;
+       border: 1px solid #9aaab9;
+       width: 200px;
+       margin-top: 15px;
+     }
+ 
+     button {/*Tamanho, cor da fonte e cor, arredondamento, tamanho da fonte e o cursor do botão */
+       padding: 8px 25px;
+       background-color: #295f82;
+       color: white;
+       border: none;
+       border-radius: 10px;
+       font-size: 16px;
+       cursor: pointer;
+     }
+ 
+     button:hover {/*Cor da fonte e cor de como ficará o hover do botão*/
+       background-color: #83bcd3;
+       color:black;
+     }
+ 
+     div {/*Tamnho da fonte, margem e cor da div*/
+       font-size: 17px;
+       margin: 13px 0;
+       color: #2c3e50;
+     }
+ 
+     #resul{/*Estilo da div resul: A margem, a distância das bordas, a cor, o arredondamento, o sombreamento e posição*/
+       margin-top: 15px;
+       padding: 10px;
+       background-color: rgb(250, 245, 245);
+       border-radius: 10px;
+       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+       display: inline-block;
+       text-align: left;
+     }
+   </style>
+</head>
+<body>
+     <h2>Conversão de números</h2>
+    <h3>Qual é a base do seu número?</h3>
+    <select id="base_entrada">
+        <option value="2">Binário</option>
+        <option value="8">Octal</option>
+        <option value="10">Decimal</option>
+        <option value="16">Hexadecimal</option>
+    </select><br>   
+    <h3>Você está mudando seu número para qual base?</h3>
+    <select id="base_resultado">
+        <option value="2">Binário</option>
+        <option value="8">Octal</option>
+        <option value="10">Decimal</option>
+        <option value="16">Hexadecimal</option>
+    </select><br>
+    <h3>Qual é o número</h3>
+    <input type="text" id="ipt_numero"><br><br>
+    <button onclick="converter()">Converter</button><br>
+    <div id="resul">
+    <div id="resultado">O seu número é:</div>
+    </div>
+</body>
+</html>
+<script>
+    function converter(){
+        var basee = base_entrada.value;
+        var baser = base_resultado.value;
+        var numero = ipt_numero.value;
+        var exp = numero;
+        var a=0;
+        var b=0;
+        if(basee==2){
+           while(exp>0){
+            a=exp%10;
+            if(a>1){
+               resultado.innerHTML = "Número inválido";
+               b=1;
+               exp=0;
+            }else{
+                exp =Math.trunc(exp/10) ;
+            }
+           }
+           if(b==0){
+                if(baser==2){
+                     resultado.innerHTMl="O seu numero em binário é: "+numero;
+                }else if(baser==8){
+                     resultado.innerHTML="O seu numero em octal é: "+parseInt(numero,2).toString(8);
+                }else if(baser==10){
+                     resultado.innerHTML="O seu numero em decimal é: "+parseInt(numero,2).toString(10);
+                }else if(baser==16){
+                     resultado.innerHTML="O seu numero em hexadecimal é: "+parseInt(numero,2).toString(16);
+                }
+            }
+        }
+        if(basee==8){
+            while(exp>0){
+            a=exp%10;
+            if(a>7){
+               resultado.innerHTML="Número inválido";
+               b=1;
+               exp=0;
+            }else{
+                exp =Math.trunc(exp/10) ;
+            }
+           }
+            if(b==0){
+               if(baser==2){
+                     resultado.innerHTML="o seu numero em binário é: "+parseInt(numero,8).toString(2);
+               }else if(baser==8){
+                     resultado.innerHTML="o seu numero em octal é: "+numero;
+
+                }else if(baser==10){
+                     resultado.innerHTML="o seu numero em decimal é: "+parseInt(numero,8).toString(10);
+                }else if(baser==16){
+                     resultado.innerHTML="o seu numero em hexadecimal é: "+parseInt(numero,8).toString(16);
+                }
+            }
+        }
+        if(basee==16){
+            var position=numero.search(/[^0-9A-Fa-f]/);
+            if(position!=-1){
+                resultado.innerHTML="Número inválido";
+            }else if(baser==2){
+                     resultado.innerHTML="o seu numero em binário é: "+parseInt(numero,16).toString(2);
+                }else if(baser==8){
+                     resultado.innerHTML="o seu numero em octal é: "+parseInt(numero,16).toString(8);
+                }else if(baser==10){
+                     resultado.innerHTML="o seu numero em decimal é: "+parseInt(numero,16).toString(10);
+                }else if(baser==16){
+                     resultado.innerHTML="o seu numero em hexadecimal é: "+numero;
+                }
+}    
+        if(basee==10){
+            var position=numero.search(/[^0-9]/);
+            if(position!=-1){
+                resultado.innerHTML="Número inválido";
+            }else if(baser==2){
+                     resultado.innerHTML="o seu numero em binário é: "+parseInt(numero,10).toString(2);
+                }else if(baser==8){
+                     resultado.innerHTML="o seu numero em octal é: "+parseInt(numero,10).toString(8);
+                }else if(baser==10){
+                     resultado.innerHTML="o seu numero em decimal é: "+numero;
+                }else if(baser==16){
+                     resultado.innerHTML="o seu numero em hexadecimal é: "+parseInt(numero,10).toString(16);
+                }
+        }
+}
+</script>
